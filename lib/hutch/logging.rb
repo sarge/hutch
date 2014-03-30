@@ -11,6 +11,11 @@ module Hutch
 
     def self.setup_logger(target = $stdout)
       require 'hutch/config'
+
+      if target == $stdout
+        $stdout.sync = true
+      end
+
       @logger = Logger.new(target)
       @logger.level = Hutch::Config.log_level
       @logger.formatter = HutchFormatter.new
